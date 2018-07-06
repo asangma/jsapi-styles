@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Mario Theme</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="../dist/mario/main.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
+  <script src="https://js.arcgis.com/4.8/"></script>
+  <script>
+    require([
+      "esri/Map",
+      "esri/widgets/Search",
+      "esri/views/MapView",
+      "dojo/domReady!"
+    ], function(Map, Search, MapView) {
+
+      var map = new Map({
+        basemap: "streets"
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        zoom: 13,
+        center: [-117.1825899999999, 34.055411433014434]
+      });
+
+      var search = new Search({
+        view: view
+      });
+
+      view.ui.add(search, "top-right");
+
+      view.when(function() {
+        search.search("Redlands, CA");
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
